@@ -1,0 +1,1812 @@
+<eta charset="UTF-8">
+    <me!DOCTYPE html>
+<html lang="en">
+<head>
+    <mta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillBridge LIVE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+        }
+
+        nav ul li a:hover {
+            color: #2563eb;
+        }
+
+        .nav-btn {
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 8%;
+            background: linear-gradient(135deg, #eef4ff, #ffffff);
+        }
+
+        .hero-content {
+            width: 55%;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 19px;
+            line-height: 1.7;
+            color: #5b6475;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .secondary-btn {
+            border: 1px solid #2563eb;
+            color: #2563eb;
+            padding: 15px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ================= LIVE CARD ================= */
+
+        .hero-card {
+            width: 390px;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+
+        .live-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .live {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .skill {
+            margin: 20px 0;
+        }
+
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .bar {
+            width: 100%;
+            height: 9px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .c {
+            width: 82%;
+            background: #2563eb;
+        }
+
+        .embedded {
+            width: 76%;
+            background: #7c3aed;
+        }
+
+        .arduino {
+            width: 84%;
+            background: #059669;
+        }
+
+        .iot {
+            width: 52%;
+            background: #f59e0b;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #667085;
+            font-size: 17px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .step h3 {
+            margin: 15px 0 8px;
+        }
+
+        .step p {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        /* ================= DASHBOARD PREVIEW ================= */
+
+        .dashboard {
+            background: #111827;
+            color: white;
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .status {
+            background: #064e3b;
+            color: #6ee7b7;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .dash-card {
+            background: #1f2937;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .match {
+            color: #34d399;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* ================= ROLES ================= */
+
+        .roles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .role-card {
+            background: white;
+            padding: 35px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .role-card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .role-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .role-card p {
+            color: #667085;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .role-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            text-align: center;
+            background: #2563eb;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            margin-bottom: 25px;
+            font-size: 17px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #2563eb;
+            padding: 14px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer p {
+            color: #9ca3af;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                gap: 50px;
+            }
+
+            .hero-content {
+                width: 100%;
+            }
+
+            .hero-card {
+                width: 100%;
+            }
+
+            .features,
+            .roles {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero {
+                padding: 50px 5%;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Skill<span>Bridge</span> LIVE
+        </div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#dashboard">Live Map</a></li>
+        </ul>
+
+        <a href="#roles" class="nav-btn">Get Started</a>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ⚡ Real-Time Academia × Industry Platform
+            </div>
+
+            <h1>
+                Don't Just List Skills.
+                <span>Prove Them.</span>
+            </h1>
+
+            <p>
+                SkillBridge LIVE connects students, colleges and industries
+                through verified skills, real-time skill-gap analysis,
+                industry challenges and intelligent internship matching.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#roles" class="primary-btn">
+                    Explore Platform →
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    See Features
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- LIVE SKILL CARD -->
+
+        <div class="hero-card">
+
+            <div class="live-title">
+
+                <h3>Student Skill Map</h3>
+
+                <span class="live">
+                    ● LIVE
+                </span>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>C Programming</span>
+                    <b>82%</b>
+                </div>
+
+                <div class="bar">
+                    <div class="fill c"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Embedded C</span>
+                    <b>76%</b>
+                </div>
+
+                <div class="bar">
+                    <div class="fill embedded"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Arduino</span>
+                    <b>84%</b>
+                </div>
+
+                <div class="bar">
+                    <div class="fill arduino"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>IoT ⚠️</span>
+                    <b>52%</b>
+                </div>
+
+                <div class="bar">
+                    <div class="fill iot"></div>
+                </div>
+
+            </div>
+
+
+            <hr>
+
+            <br>
+
+            <p>
+                🎯 Biggest Skill Gap:
+                <strong>IoT</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section id="features">
+
+        <div class="section-title">
+
+            <h2>What Makes SkillBridge LIVE Different?</h2>
+
+            <p>
+                Not another job portal. A real-time skill intelligence platform.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🧪</div>
+
+                <h3>Skill Proof</h3>
+
+                <p>
+                    Students don't simply claim skills.
+                    They prove their ability through practical challenges
+                    and assessments.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📊</div>
+
+                <h3>Live Skill Map</h3>
+
+                <p>
+                    Track student skill levels and identify
+                    strengths and gaps in real time.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🎯</div>
+
+                <h3>Smart Matching</h3>
+
+                <p>
+                    Match students with internships based on
+                    actual verified skills instead of only resumes.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🏢</div>
+
+                <h3>Industry Challenges</h3>
+
+                <p>
+                    Companies can publish real-world technical
+                    challenges and discover capable students.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🔔</div>
+
+                <h3>Real-Time Alerts</h3>
+
+                <p>
+                    Students receive alerts when new opportunities
+                    match their current skill profile.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🎓</div>
+
+                <h3>College Analytics</h3>
+
+                <p>
+                    Faculty can identify common skill gaps across
+                    departments and plan targeted training.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section id="how">
+
+        <div class="section-title">
+
+            <h2>How SkillBridge LIVE Works</h2>
+
+            <p>
+                From skill claim to real industry opportunity.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>Profile</h3>
+
+                <p>
+                    Student creates a skill profile.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>Assess</h3>
+
+                <p>
+                    Practical challenges test real ability.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>Analyze</h3>
+
+                <p>
+                    System identifies skill strengths and gaps.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">4</div>
+
+                <h3>Match</h3>
+
+                <p>
+                    Skills are compared with industry requirements.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">5</div>
+
+                <h3>Opportunity</h3>
+
+                <p>
+                    Student gets internships and challenges.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard">
+
+        <div class="section-title">
+
+            <h2>Real-Time Skill Intelligence</h2>
+
+            <p>
+                Example student dashboard
+            </p>
+
+        </div>
+
+
+        <div class="dashboard">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <h2>Student Employability Dashboard</h2>
+
+                    <p>
+                        Electronics & Communication Engineering
+                    </p>
+
+                </div>
+
+                <span class="status">
+                    ● Profile Active
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+
+                <div class="dash-card">
+
+                    <h3>Overall Skill Score</h3>
+
+                    <div class="score">
+                        78%
+                    </div>
+
+                    <p>
+                        Your technical readiness is above
+                        the current department average.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Strong Skills:
+                        <b>C • Arduino • Embedded Systems</b>
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Skill Gap:
+                        <b>IoT • MQTT</b>
+                    </p>
+
+                </div>
+
+
+                <div class="dash-card">
+
+                    <h3>Internship Match</h3>
+
+                    <div class="match">
+                        87%
+                    </div>
+
+                    <p>
+                        Embedded Systems Intern
+                    </p>
+
+                    <br>
+
+                    <p>
+                        4 skills matched
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ROLES ================= -->
+
+    <section id="roles">
+
+        <div class="section-title">
+
+            <h2>Choose Your Role</h2>
+
+            <p>
+                One platform connecting the entire ecosystem.
+            </p>
+
+        </div>
+
+
+        <div class="roles">
+
+
+            <div class="role-card">
+
+                <div class="icon">👨‍🎓</div>
+
+                <h3>Student</h3>
+
+                <p>
+                    Build your verified skill profile,
+                    discover gaps and find opportunities.
+                 <a href="#" class="role-btn"
+                     onclick="studentLogin(); return false;">
+                      Student Portal
+                  </a>
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="icon">🎓</div>
+
+                <h3>College</h3>
+
+                <p>
+                    Monitor department skill readiness
+                    and industry demand.
+                </p>
+
+                <a href="#" class="role-btn"
+                   onclick="collegeLogin()">
+                    College Portal
+                </a>
+
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="icon">🏢</div>
+
+                <h3>Industry</h3>
+
+                <p>
+                    Define skill requirements and discover
+                    verified student talent.
+                </p>
+
+                <a href="#" class="role-btn"
+                   onclick="industryLogin()">
+                    Industry Portal
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Build Skills. Prove Skills. Get Opportunities.
+        </h2>
+
+        <p>
+            The future of academia-industry collaboration starts here.
+        </p>
+
+        <a href="#roles" class="cta-btn">
+            Start with SkillBridge LIVE
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <strong>
+            SkillBridge LIVE
+        </strong>
+
+        <p>
+            Academia × Industry × Skills
+        </p>
+
+        <p>
+            © 2026 SkillBridge LIVE
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+<script>
+     function studentLogin() {
+    document.body.innerHTML = `
+        <div style="
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f4f7ff;
+            font-family:Arial;
+        ">
+
+            <div style="
+                width:380px;
+                background:white;
+                padding:35px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,0,0,0.15);
+            ">
+
+                <h2 style="text-align:center;">
+                    🎓 Student Login
+                </h2>
+
+                <p style="text-align:center;color:#666;">
+                    Welcome to SkillBridge LIVE
+                </p>
+                <button onclick="window.location.reload()"
+              style="border:none; background:none; color:#2563eb; cursor:pointer; margin:8px 0 12px;">
+              ← Back to Home
+               </button>
+
+                <input id="studentName"
+                    type="text"
+                    placeholder="Enter your name"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin:10px 0;
+                        box-sizing:border-box;
+                    ">
+
+                <input id="studentEmail"
+                    type="email"
+                    placeholder="Enter your email"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin:10px 0;
+                        box-sizing:border-box;
+                    ">
+
+                <input id="studentBranch"
+                    type="text"
+                    placeholder="Enter your branch (Example: ECE)"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin:10px 0;
+                        box-sizing:border-box;
+                    ">
+
+                <button onclick="studentDashboard()"
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin-top:15px;
+                        border:none;
+                        border-radius:10px;
+                        background:#2563eb;
+                        color:white;
+                        font-size:16px;
+                        cursor:pointer;
+                    ">
+                    Login
+                </button>
+
+            </div>
+        </div>
+    `;
+}   
+    function studentDashboard() {
+    const name = document.getElementById("studentName")?.value || sessionStorage.getItem("studentName") || "Student";
+     sessionStorage.setItem("studentName", name);    
+
+    document.body.innerHTML = `
+    <div style="
+        min-height:100vh;
+        padding:40px;
+        background:#f4f7ff;
+        font-family:Arial;
+        box-sizing:border-box;
+    ">
+        <div style="text-align:center;">
+         <button onclick="window.location.reload()"
+            style="padding:8px 14px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+              ← Back to Home
+             </button>
+            <h1>🎓 Welcome, ${name}!</h1>
+            <p style="color:#555;">Your SkillBridge LIVE student dashboard</p>
+        </div>
+
+        <div style="
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            flex-wrap:wrap;
+            margin-top:45px;
+        ">
+            <div style="
+                width:230px;
+                padding:25px;
+                background:white;
+                border-radius:16px;
+                text-align:center;
+                box-shadow:0 8px 20px rgba(0,0,0,0.1);
+            ">
+                <h2>🧠 My Skill Profile</h2>
+                <p>Add and view your technical skills.</p>
+                <button onclick="openSkillProfile()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+                    View Profile
+                </button>
+            </div>
+
+            <div style="
+                width:230px;
+                padding:25px;
+                background:white;
+                border-radius:16px;
+                text-align:center;
+                box-shadow:0 8px 20px rgba(0,0,0,0.1);
+            ">
+                <h2>📊 Skill Gap Analysis</h2>
+                <p>Find skills you can improve.</p>
+                <button onclick="openSkillGap()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+                    Check Gaps
+                </button>
+            </div>
+
+            <div style="
+                width:230px;
+                padding:25px;
+                background:white;
+                border-radius:16px;
+                text-align:center;
+                box-shadow:0 8px 20px rgba(0,0,0,0.1);
+            ">
+                <h2>💼 Opportunities</h2>
+                <p>Explore suitable jobs and internships.</p>
+                <button onclick="openOpportunities()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+                    Explore
+                </button>
+            </div>
+        </div>
+    </div>
+`;
+}
+function openSkillProfile() {
+    document.body.innerHTML = `
+        <div style="text-align:center; padding:70px; font-family:Arial; background:#f4f7ff; min-height:100vh;">
+            <h1>🧠 My Skill Profile</h1>
+            <p>Enter your skills, separated by commas.</p>
+
+            <input id="skills" placeholder="Example: HTML, CSS, JavaScript"
+                style="width:320px; padding:12px; border-radius:8px; border:1px solid #ccc;">
+
+            <br><br>
+
+            <button onclick="saveSkills()"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                Save Skills
+            </button>
+
+            <p id="skillResult" style="margin-top:25px;"></p>
+            <button onclick="studentDashboard()"
+            style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+           ← Back to Dashboard
+             </button>
+        </div>
+    `;
+}
+
+function saveSkills() {
+    const skills = document.getElementById("skills").value;
+
+    document.getElementById("skillResult").innerHTML =
+        skills ? `✅ Your skills: ${skills}` : "⚠️ Please enter at least one skill.";
+}
+function openSkillGap() {
+    document.body.innerHTML = `
+        <div style="text-align:center; padding:70px; font-family:Arial; background:#f4f7ff; min-height:100vh;">
+            <h1>📊 Skill Gap Analysis</h1>
+            <p>Enter the skills you know, separated by commas.</p>
+
+               <button onclick="studentDashboard()"
+              style="padding:8px 14px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+              ← Back to Dashboard
+             </button>
+
+<br><br>
+
+            <input id="currentSkills" placeholder="Example: HTML, CSS"
+                style="width:320px; padding:12px; border-radius:8px; border:1px solid #ccc;">
+
+            <br><br>
+
+            <button onclick="checkSkillGap()"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                Analyze Skills
+            </button>
+
+            <p id="gapResult" style="margin-top:25px; font-size:18px;"></p>
+        </div>
+    `;
+}
+
+function checkSkillGap() {
+    const entered = document.getElementById("currentSkills").value.toLowerCase();
+    const requiredSkills = ["html", "css", "javascript", "git"];
+
+    const missingSkills = requiredSkills.filter(skill => !entered.includes(skill));
+
+    document.getElementById("gapResult").innerHTML =
+        missingSkills.length
+            ? `📚 Skills to learn next: <b>${missingSkills.join(", ")}</b>`
+            : "🎉 Excellent! You have all the basic skills.";
+}
+function openOpportunities() {
+    document.body.innerHTML = `
+        <div style="padding:50px; font-family:Arial; background:#f4f7ff; min-height:100vh; text-align:center;">
+            <h1>💼 Opportunities</h1>
+            <p>Recommended internships and jobs for you.</p>
+            <button onclick="studentDashboard()"
+            style="padding:8px 14px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+           ← Back to Dashboard
+           </button>
+
+<br><br>
+
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
+
+                <div style="width:240px; background:white; padding:22px; border-radius:15px;">
+                    <h2>Frontend Intern</h2>
+                    <p>Skills: HTML, CSS, JavaScript</p>
+                    <button onclick="applyForOpportunity('Frontend Intern', 'HTML, CSS, JavaScript')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        Apply Now
+                    </button>
+                </div>
+
+                <div style="width:240px; background:white; padding:22px; border-radius:15px;">
+                    <h2>Web Developer</h2>
+                    <p>Skills: HTML, CSS, Git</p>
+                    <button onclick="applyForOpportunity('Web Developer', 'HTML, CSS, Git')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        Apply Now
+                    </button>
+                </div>
+
+                <div style="width:240px; background:white; padding:22px; border-radius:15px;">
+                    <h2>JavaScript Trainee</h2>
+                    <p>Skills: JavaScript, Git</p>
+                    <button onclick="applyForOpportunity('JavaScript Trainee', 'JavaScript, Git')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        Apply Now
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    `;
+}
+function collegeLogin() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; display:flex; justify-content:center; align-items:center; background:#f4f7ff; font-family:Arial;">
+            <div style="width:380px; background:white; padding:35px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+                <h2 style="text-align:center;">🏫 College Login</h2>
+                <p style="text-align:center; color:#666;">Welcome to SkillBridge LIVE</p>
+
+                <input id="collegeName" type="text" placeholder="Enter college name"
+                    style="width:100%; padding:12px; margin:10px 0; box-sizing:border-box;">
+
+                <input id="collegeEmail" type="email" placeholder="Enter college email"
+                    style="width:100%; padding:12px; margin:10px 0; box-sizing:border-box;">
+
+                <button onclick="collegeDashboard()"
+                    style="width:100%; padding:12px; margin-top:15px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    Login
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function collegeDashboard() {
+  const college = document.getElementById("collegeName")?.value || sessionStorage.getItem("collegeName") || "College";
+       sessionStorage.setItem("collegeName", college);  
+ document.body.innerHTML = `
+    <div style="min-height:100vh; padding:40px; background:#f4f7ff; font-family:Arial; box-sizing:border-box;">
+        <div style="text-align:center;">
+            <button onclick="window.location.reload()"
+            style="padding:8px 14px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+         ← Back to Home
+         </button>
+            <h1>🏫 Welcome, ${college}!</h1>
+            <p style="color:#555;">Your SkillBridge LIVE college dashboard</p>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:45px;">
+
+            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <h2>👩‍🎓 Student Insights</h2>
+                <p>View student skill profiles and progress.</p>
+                <button onclick="openStudentInsights()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    View Students
+                </button>
+            </div>
+
+            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <h2>📊 Department Analytics</h2>
+                <p>Check department skill readiness.</p>
+                <button onclick="openDepartmentAnalytics()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    View Analytics
+                </button>
+            </div>
+
+            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <h2>🤝 Industry Connections</h2>
+                <p>Explore company partnerships.</p>
+                <button onclick="openIndustryConnections()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    Explore
+                </button>
+            </div>
+
+        </div>
+    </div>
+`;   
+}
+function industryLogin() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; display:flex; justify-content:center; align-items:center; background:#f4f7ff; font-family:Arial;">
+            <div style="width:380px; background:white; padding:35px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+                <h2 style="text-align:center;">🏢 Industry Login</h2>
+                <p style="text-align:center; color:#666;">Welcome to SkillBridge LIVE</p>
+
+                <input id="companyName" type="text" placeholder="Enter company name"
+                    style="width:100%; padding:12px; margin:10px 0; box-sizing:border-box;">
+
+                <input id="companyEmail" type="email" placeholder="Enter company email"
+                    style="width:100%; padding:12px; margin:10px 0; box-sizing:border-box;">
+
+                <button onclick="industryDashboard()"
+                    style="width:100%; padding:12px; margin-top:15px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    Login
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function industryDashboard() {
+   const company = document.getElementById("companyName")?.value || sessionStorage.getItem("companyName") || "Company";
+      sessionStorage.setItem("companyName", company); 
+
+    document.body.innerHTML = `
+    <div style="min-height:100vh; padding:40px; background:#f4f7ff; font-family:Arial; box-sizing:border-box;">
+        <div style="text-align:center;">
+         <button onclick="window.location.reload()"
+          style="padding:8px 14px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
+         ← Back to Home
+         </button>   
+            <h1>🏢 Welcome, ${company}!</h1>
+            <p style="color:#555;">Your SkillBridge LIVE industry dashboard</p>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:45px;">
+
+            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <h2>📝 Post Job Requirement</h2>
+                <p>Add the skills needed for a role.</p>
+                <button onclick="openJobRequirement()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    Post Requirement
+                </button>
+            </div>
+
+            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <h2>👩‍🎓 Find Students</h2>
+                <p>Find verified student talent.</p>
+                <button onclick="openFindStudents()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    Find Talent
+                </button>
+            </div>
+
+            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <h2>📈 Skill Demand Analytics</h2>
+                <p>View most requested technical skills.</p>
+                <button onclick="openSkillDemandAnalytics()"
+                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                    View Demand
+                </button>
+            </div>
+
+        </div>
+    </div>
+`;
+}
+function openStudentInsights() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>👩‍🎓 Student Insights</h1>
+            <p>Student skill profiles and progress overview.</p>
+            <button onclick="collegeDashboard()"
+            style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+         ← Back to College Dashboard
+           </button>
+
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
+                <div style="width:220px; background:white; padding:20px; border-radius:15px;">
+                    <h2>Sahana</h2>
+                    <p>Skills: HTML</p>
+                    <p>Learning: CSS, JavaScript, Git</p>
+                </div>
+
+                <div style="width:220px; background:white; padding:20px; border-radius:15px;">
+                    <h2>Arun</h2>
+                    <p>Skills: HTML, CSS</p>
+                    <p>Learning: JavaScript, Git</p>
+                </div>
+
+                <div style="width:220px; background:white; padding:20px; border-radius:15px;">
+                    <h2>Priya</h2>
+                    <p>Skills: HTML, CSS, JavaScript</p>
+                    <p>Learning: Git</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function openDepartmentAnalytics() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>📊 Department Analytics</h1>
+            <p>Student skill readiness overview.</p>
+            <button onclick="collegeDashboard()"
+          style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+            ← Back to College Dashboard
+          </button>
+
+            <div style="max-width:600px; margin:35px auto; background:white; padding:30px; border-radius:16px; text-align:left;">
+                <h3>HTML — 90%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:90%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+
+                <h3>CSS — 70%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:70%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+
+                <h3>JavaScript — 45%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:45%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+
+                <h3>Git — 30%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:30%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function openIndustryConnections() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>🤝 Industry Connections</h1>
+            <p>Companies connected with your college.</p>
+            <button onclick="collegeDashboard()"
+           style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+         ← Back to College Dashboard
+          </button>
+
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
+                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
+                    <h2>TechNova</h2>
+                    <p>Frontend Internships</p>
+                    <button onclick="sendConnectionRequest('TechNova', 'Frontend Internships')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        Connect
+                    </button>
+                </div>
+
+                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
+                    <h2>CodeCraft</h2>
+                    <p>Web Developer Roles</p>
+                    <button onclick="sendConnectionRequest('CodeCraft', 'Web Developer Roles')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        Connect
+                    </button>
+                </div>
+
+                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
+                    <h2>DataSpark</h2>
+                    <p>JavaScript Trainee Roles</p>
+                    <button onclick="sendConnectionRequest('DataSpark', 'JavaScript Trainee Roles')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        Connect
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function openJobRequirement() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:60px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>📝 Post Job Requirement</h1>
+            <p>Add a role and the skills your company needs.</p>
+            <button onclick="industryDashboard()"
+         style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+           ← Back to Industry Dashboard
+           </button>
+
+            <input id="jobTitle" placeholder="Example: Frontend Intern"
+                style="width:320px; padding:12px; margin:10px; border-radius:8px; border:1px solid #ccc;">
+
+            <br>
+
+            <input id="jobSkills" placeholder="Example: HTML, CSS, JavaScript"
+                style="width:320px; padding:12px; margin:10px; border-radius:8px; border:1px solid #ccc;">
+
+            <br>
+
+            <button onclick="saveJobRequirement()"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                Post Requirement
+            </button>
+
+            <p id="jobResult" style="margin-top:25px; font-size:18px;"></p>
+        </div>
+    `;
+}
+
+function saveJobRequirement() {
+    const title = document.getElementById("jobTitle").value;
+    const skills = document.getElementById("jobSkills").value;
+
+    document.getElementById("jobResult").innerHTML =
+        title && skills
+            ? `✅ <b>${title}</b> requirement posted for: ${skills}`
+            : "⚠️ Please enter both job title and required skills.";
+}
+function openFindStudents() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>👩‍🎓 Find Students</h1>
+            <p>Verified student talent matching industry requirements.</p>
+            <button onclick="industryDashboard()"
+         style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+         ← Back to Industry Dashboard
+         </button>
+
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
+                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
+                    <h2>Sahana</h2>
+                    <p>Skills: HTML, CSS</p>
+                    <button onclick="viewStudentProfile('Sahana', 'HTML, CSS')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        View Profile
+                    </button>
+                </div>
+
+                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
+                    <h2>Arun</h2>
+                    <p>Skills: HTML, CSS, JavaScript</p>
+                    <button onclick="viewStudentProfile('Arun', 'HTML, CSS, JavaScript')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        View Profile
+                    </button>
+                </div>
+
+                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
+                    <h2>Priya</h2>
+                    <p>Skills: JavaScript, Git</p>
+                    <button onclick="viewStudentProfile('Priya', 'JavaScript, Git')"
+                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        View Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function openSkillDemandAnalytics() {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>📈 Skill Demand Analytics</h1>
+            <p>Most requested skills from companies.</p>
+            <button onclick="industryDashboard()"
+            style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+          ← Back to Industry Dashboard
+             </button>
+
+            <div style="max-width:600px; margin:35px auto; background:white; padding:30px; border-radius:16px; text-align:left;">
+                <h3>JavaScript — 95%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:95%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+
+                <h3>HTML — 90%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:90%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+
+                <h3>CSS — 80%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:80%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+
+                <h3>Git — 70%</h3>
+                <div style="height:18px; background:#dbeafe; border-radius:10px;">
+                    <div style="width:70%; height:18px; background:#2563eb; border-radius:10px;"></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function goHome() {
+    window.location.reload();
+}
+function viewStudentProfile(name, skills) {
+    const profiles = {
+        Sahana: {
+            college: "VCET College",
+            department: "Computer Science",
+            readiness: "90%",
+            project: "SkillBridge LIVE Student Module",
+            nextSkills: "CSS, JavaScript, Git",
+            email: "sahana07@gmail.com"
+        },
+        Arun: {
+            college: "VCET College",
+            department: "Information Technology",
+            readiness: "80%",
+            project: "Portfolio Website",
+            nextSkills: "Git, React",
+            email: "arun11@gmail.com"
+        },
+        Priya: {
+            college: "VCET College",
+            department: "Computer Science",
+            readiness: "65%",
+            project: "JavaScript Quiz App",
+            nextSkills: "React, Node.js",
+            email: "priyakumar@gmail.com"
+        }
+    };
+
+    const profile = profiles[name];
+
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:50px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>👩‍🎓 ${name}'s Detailed Profile</h1>
+            <p>Verified student talent information</p>
+
+            <div style="max-width:480px; margin:30px auto; background:white; padding:30px; border-radius:16px; text-align:left;">
+                <p><b>College:</b> ${profile.college}</p>
+                <p><b>Department:</b> ${profile.department}</p>
+                <p><b>Skill Readiness:</b> ${profile.readiness}</p>
+                <p><b>Completed Project:</b> ${profile.project}</p>
+                <p><b>Recommended Next Skills:</b> ${profile.nextSkills}</p>
+                <p><b>Email:</b> ${profile.email}</p>
+
+                <div style="text-align:center; margin-top:25px;">
+                    <button onclick="openFindStudents()"
+                        style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                        ← Back to Students
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function applyForOpportunity(role, skills) {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:60px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>💼 Apply for ${role}</h1>
+            <p><b>Required Skills:</b> ${skills}</p>
+            
+<br><br>
+
+            <input id="applicantName" placeholder="Enter your name"
+                style="width:320px; padding:12px; margin:10px; border-radius:8px; border:1px solid #ccc;">
+
+            <br>
+
+            <input id="applicantEmail" type="email" placeholder="Enter your email"
+                style="width:320px; padding:12px; margin:10px; border-radius:8px; border:1px solid #ccc;">
+
+            <br>
+
+            <button onclick="submitApplication('${role}')"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                Submit Application
+            </button>
+
+            <br><br>
+
+            <button onclick="openOpportunities()"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#64748b; color:white;">
+                ← Back to Opportunities
+            </button>
+            
+            <p id="applicationResult" style="margin-top:25px; font-size:18px;"></p>
+        </div>
+    `;
+}
+
+function submitApplication(role) {
+    const name = document.getElementById("applicantName").value;
+    const email = document.getElementById("applicantEmail").value;
+
+    document.getElementById("applicationResult").innerHTML =
+        name && email
+            ? `✅ Application submitted for <b>${role}</b>!`
+            : "⚠️ Please enter your name and email.";
+}
+function sendConnectionRequest(company, opportunity) {
+    document.body.innerHTML = `
+        <div style="min-height:100vh; padding:60px; background:#f4f7ff; font-family:Arial; text-align:center;">
+            <h1>🤝 Connect with ${company}</h1>
+            <p><b>Opportunity:</b> ${opportunity}</p>
+
+            <input id="contactPerson" placeholder="Enter contact person name"
+                style="width:320px; padding:12px; margin:10px; border-radius:8px; border:1px solid #ccc;">
+
+            <br>
+
+            <input id="contactEmail" type="email" placeholder="Enter college email"
+                style="width:320px; padding:12px; margin:10px; border-radius:8px; border:1px solid #ccc;">
+
+            <br>
+
+            <button onclick="submitConnectionRequest('${company}')"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
+                
+            </button>
+
+            <br><br>
+
+            <button onclick="openIndustryConnections()"
+                style="padding:10px 18px; border:none; border-radius:8px; background:#64748b; color:white;">
+                ← Back to Industry Connections
+            </button>
+
+            <p id="connectionResult" style="margin-top:25px; font-size:18px;"></p>
+        </div>
+    `;
+}
+
+function submitConnectionRequest(company) {
+    const person = document.getElementById("contactPerson").value;
+    const email = document.getElementById("contactEmail").value;
+
+    document.getElementById("connectionResult").innerHTML =
+        person && email
+            ? `✅ Connection request sent to <b>${company}</b>!`
+            : "⚠️ Please enter contact person name and college email.";
+}
+</script>
+</body>
+
+</html>
