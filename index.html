@@ -1160,6 +1160,7 @@ body.sb-dark .sb-notification-panel {
         align-items: flex-start;
     }
 }
+       
 /* ===== COLLEGE FACULTY DASHBOARD ===== */
 
 .sb-college-section {
@@ -2287,10 +2288,51 @@ body.dark-mode .sb-auth-input {
         </div>
     `;
 }   
-    function studentDashboard() {
+    async function studentDashboard() {
 
-    const name =
-        sessionStorage.getItem("studentName") || "Student";
+   const name =
+    document.getElementById("studentName")?.value.trim() ||
+    sessionStorage.getItem("studentName") ||
+    "";
+
+   const email =
+    document.getElementById("studentEmail")?.value.trim() ||
+    sessionStorage.getItem("studentEmail") ||
+    "";
+
+    const branch =
+    document.getElementById("studentBranch")?.value.trim() ||
+    sessionStorage.getItem("studentBranch") ||
+    "";
+
+    if (!name || !email || !branch) {
+        alert("⚠️ Please enter Name, Email and Branch.");
+        return;
+    }
+
+    // Save student details for dashboard
+    sessionStorage.setItem("studentName", name);
+    sessionStorage.setItem("studentEmail", email);
+    sessionStorage.setItem("studentBranch", branch);
+
+    try {
+
+        // Save student data to Firebase Firestore
+        await addDoc(collection(window.db, "students"), {
+            name: name,
+            email: email,
+            branch: branch,
+            createdAt: serverTimestamp()
+        });
+
+        console.log("Student data saved successfully!");
+
+    } catch (error) {
+
+        console.error("Firestore Error:", error);
+        alert("❌ Student data could not be saved.");
+        return;
+    }
 
     document.body.innerHTML = `
         <div style="
@@ -2323,20 +2365,13 @@ body.dark-mode .sb-auth-input {
 
             </div>
 
-
-            <!-- STUDENT FEATURES -->
-
             <div style="
                 display:grid;
-                grid-template-columns:
-                    repeat(auto-fit,minmax(230px,1fr));
+                grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
                 gap:22px;
                 max-width:1100px;
                 margin:40px auto;
             ">
-
-
-                <!-- Skill Radar -->
 
                 <div style="
                     background:white;
@@ -2345,13 +2380,8 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>🧠 Skill Radar</h2>
-
-                    <p>
-                        View your technical skills
-                        and skill strength.
-                    </p>
+                    <p>View your technical skills and skill strength.</p>
 
                     <button onclick="openSkillProfile()"
                         style="
@@ -2364,12 +2394,7 @@ body.dark-mode .sb-auth-input {
                         ">
                         View Skills
                     </button>
-
                 </div>
-
-
-
-                <!-- AI Skill Gap -->
 
                 <div style="
                     background:white;
@@ -2378,13 +2403,8 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>🤖 AI Skill Gap</h2>
-
-                    <p>
-                        Find missing skills and
-                        learn what to improve.
-                    </p>
+                    <p>Find missing skills and learn what to improve.</p>
 
                     <button onclick="openSkillGap()"
                         style="
@@ -2397,12 +2417,7 @@ body.dark-mode .sb-auth-input {
                         ">
                         Analyze Skills
                     </button>
-
                 </div>
-
-
-
-                <!-- Daily Challenges -->
 
                 <div style="
                     background:white;
@@ -2411,13 +2426,8 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>🔥 Daily Challenges</h2>
-
-                    <p>
-                        Solve coding challenges,
-                        earn XP and build your streak.
-                    </p>
+                    <p>Solve coding challenges, earn XP and build your streak.</p>
 
                     <button onclick="openDailyChallenges()"
                         style="
@@ -2430,12 +2440,7 @@ body.dark-mode .sb-auth-input {
                         ">
                         Start Challenge
                     </button>
-
                 </div>
-
-
-
-                <!-- Leaderboard -->
 
                 <div style="
                     background:white;
@@ -2444,13 +2449,8 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>🏆 Leaderboard</h2>
-
-                    <p>
-                        Check your XP ranking
-                        among students.
-                    </p>
+                    <p>Check your XP ranking among students.</p>
 
                     <button onclick="openLeaderboard()"
                         style="
@@ -2463,12 +2463,7 @@ body.dark-mode .sb-auth-input {
                         ">
                         View Ranking
                     </button>
-
                 </div>
-
-
-
-                <!-- Opportunities -->
 
                 <div style="
                     background:white;
@@ -2477,13 +2472,8 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>💼 Opportunities</h2>
-
-                    <p>
-                        Explore suitable jobs
-                        and internships.
-                    </p>
+                    <p>Explore suitable jobs and internships.</p>
 
                     <button onclick="openOpportunities()"
                         style="
@@ -2496,12 +2486,7 @@ body.dark-mode .sb-auth-input {
                         ">
                         Explore
                     </button>
-
                 </div>
-
-
-
-                <!-- Industry Challenges -->
 
                 <div style="
                     background:white;
@@ -2510,31 +2495,49 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>🏢 Industry Challenges</h2>
+                    <p>Apply for real-world company challenges.</p>
 
-                    <p>
-                        Apply for real-world
-                        company challenges.
+                    <button onclick="openIndustryChallenges()"
+                        style="
+                            padding:10px 18px;
+                            border:none;
+                            border-radius:8px;
+                            background:#2563eb;
+                            color:white;
+                            cursor:pointer;
+                        ">
+                        Explore Challenges
+                    </button>
+                 </div>   
+                    <!-- Notifications -->
+
+                <div style="
+                    background:white;
+                    padding:25px;
+                    border-radius:18px;
+                   text-align:center;
+                 box-shadow:0 8px 22px rgba(0,0,0,.1);
+                ">
+
+                   <h2>🔔 Notifications</h2>
+  
+                 <p>
+                   View job matches and industry notifications.
                     </p>
-            <button onclick="openIndustryChallenges()"
-              style="
-              padding:10px 18px;
-              border:none;
-               border-radius:8px;
-                background:#2563eb;
-               color:white;
-             cursor:pointer;
-              ">
-              Explore Challenges
-            </button>
-                
-             
+
+                 <button onclick="openNotifications()"
+                   style="
+                    padding:10px 18px;
+                    border:none;
+                    border-radius:8px;
+                    background:#2563eb;
+                    color:white;
+                    cursor:pointer;
+                 ">
+                  View Notifications
+                  </button>
                 </div>
-
-
-
-                <!-- Badges -->
 
                 <div style="
                     background:white;
@@ -2543,13 +2546,8 @@ body.dark-mode .sb-auth-input {
                     text-align:center;
                     box-shadow:0 8px 22px rgba(0,0,0,.1);
                 ">
-
                     <h2>🏅 Badges & Certificates</h2>
-
-                    <p>
-                        View your earned achievements
-                        and certificates.
-                    </p>
+                    <p>View your earned achievements and certificates.</p>
 
                     <button onclick="openAchievements()"
                         style="
@@ -2562,11 +2560,9 @@ body.dark-mode .sb-auth-input {
                         ">
                         View Achievements
                     </button>
-
                 </div>
 
             </div>
-
         </div>
     `;
 }
@@ -2595,11 +2591,47 @@ function openSkillProfile() {
     `;
 }
 
-function saveSkills() {
-    const skills = document.getElementById("skills").value;
+async function saveSkills() {
 
-    document.getElementById("skillResult").innerHTML =
-        skills ? `✅ Your skills: ${skills}` : "⚠️ Please enter at least one skill.";
+    const skills = document.getElementById("skills").value.trim();
+    const result = document.getElementById("skillResult");
+
+    const name = sessionStorage.getItem("studentName") || "";
+    const email = sessionStorage.getItem("studentEmail") || "";
+    const branch = sessionStorage.getItem("studentBranch") || "";
+
+    if (!skills) {
+        result.innerHTML =
+            "⚠️ Please enter at least one skill.";
+        return;
+    }
+
+    try {
+
+        await window.addDoc(
+            window.collection(window.db, "studentSkills"),
+            {
+                name: name,
+                email: email,
+                branch: branch,
+                skills: skills,
+                createdAt: window.serverTimestamp()
+            }
+        );
+
+        result.innerHTML =
+            `✅ Skills saved successfully!<br><br>
+             <b>Your Skills:</b> ${skills}`;
+
+        console.log("Student skills saved to Firebase!");
+
+    } catch (error) {
+
+        console.error("Skill Save Error:", error);
+
+        result.innerHTML =
+            "❌ Skills could not be saved.";
+    }
 }
 function openSkillGap() {
     document.body.innerHTML = `
@@ -2684,6 +2716,185 @@ function openOpportunities() {
             </div>
         </div>
     `;
+}
+async function openNotifications() {
+
+    document.body.innerHTML = `
+        <div style="
+            min-height:100vh;
+            padding:40px;
+            background:#f4f7ff;
+            font-family:Arial;
+        ">
+
+            <div style="text-align:center;">
+
+                <button onclick="studentDashboard()"
+                    style="
+                        padding:10px 18px;
+                        border:none;
+                        border-radius:8px;
+                        background:#2563eb;
+                        color:white;
+                    ">
+                    ← Back to Dashboard
+                </button>
+
+                <h1>🔔 Notifications</h1>
+
+                <p>
+                    Job opportunities matched with your skills.
+                </p>
+
+            </div>
+
+            <div id="notificationResults"
+                style="
+                    max-width:900px;
+                    margin:35px auto;
+                ">
+
+                <h3 style="text-align:center;">
+                    🔄 Checking for matching jobs...
+                </h3>
+
+            </div>
+
+        </div>
+    `;
+
+    try {
+
+        const email =
+            sessionStorage.getItem("studentEmail") || "";
+
+        const studentSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "studentSkills")
+            );
+
+        const jobSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "jobRequirements")
+            );
+
+        let studentSkills = [];
+
+        studentSnapshot.forEach(doc => {
+
+            const student = doc.data();
+
+            if (student.email === email) {
+
+                const skills =
+                    student.skills
+                        .toLowerCase()
+                        .split(",")
+                        .map(skill => skill.trim());
+
+                studentSkills.push(...skills);
+            }
+        });
+
+        studentSkills =
+            [...new Set(studentSkills)];
+
+        let html = "";
+
+        jobSnapshot.forEach(doc => {
+
+            const job = doc.data();
+
+            const requiredSkills =
+                job.skills
+                    .toLowerCase()
+                    .split(",")
+                    .map(skill => skill.trim());
+
+            const matchedSkills =
+                requiredSkills.filter(skill =>
+                    studentSkills.includes(skill)
+                );
+
+            if (matchedSkills.length > 0) {
+
+                html += `
+                    <div style="
+                        background:white;
+                        padding:25px;
+                        margin-bottom:20px;
+                        border-radius:16px;
+                        box-shadow:0 8px 20px rgba(0,0,0,.1);
+                    ">
+
+                        <h2>💼 ${job.title}</h2>
+
+                        <p>
+                            🏢 <b>Company:</b>
+                            ${job.company || "Company"}
+                        </p>
+
+                        <p>
+                            🛠️ <b>Required Skills:</b>
+                            ${job.skills}
+                        </p>
+
+                        <p>
+                            ✅ <b>Your Matching Skills:</b>
+                            ${matchedSkills.join(", ")}
+                        </p>
+
+                        <p style="
+                            color:#2563eb;
+                            font-weight:bold;
+                        ">
+                            🎯 You are suitable for this opportunity!
+                        </p>
+
+                    </div>
+                `;
+            }
+        });
+
+        const results =
+            document.getElementById("notificationResults");
+
+        if (html) {
+
+            results.innerHTML = html;
+
+        } else {
+
+            results.innerHTML = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                    text-align:center;
+                ">
+                    <h2>📭 No New Notifications</h2>
+                    <p>
+                        No industry job matches your current skills.
+                    </p>
+                </div>
+            `;
+        }
+
+    } catch (error) {
+
+        console.error("Notification Error:", error);
+
+        document.getElementById("notificationResults").innerHTML = `
+            <div style="
+                background:white;
+                padding:30px;
+                border-radius:16px;
+                text-align:center;
+            ">
+                ❌ Unable to load notifications.
+            </div>
+        `;
+    }
 }
 function collegeLogin() {
     document.body.innerHTML = `
@@ -2877,8 +3088,10 @@ function collegeDashboard() {
             </div>
 
         </div>
-    </div>
+    </div>   
 `;   
+loadCollegeDashboardStats();
+
 }
 function industryLogin() {
     document.body.innerHTML = `
@@ -2901,161 +3114,634 @@ function industryLogin() {
         </div>
     `;
 }
-
 function industryDashboard() {
-   const company = document.getElementById("companyName")?.value || sessionStorage.getItem("companyName") || "Company";
-      sessionStorage.setItem("companyName", company); 
 
+   const companyInput = document.getElementById("companyName");
+
+const company =
+    companyInput?.value.trim() ||
+    sessionStorage.getItem("companyName") ||
+    "Company";
+
+sessionStorage.setItem("companyName", company);
     document.body.innerHTML = `
-    <div style="min-height:100vh; padding:40px; background:#f4f7ff; font-family:Arial; box-sizing:border-box;">
-        <div style="text-align:center;">
-         <button onclick="window.location.reload()"
-          style="padding:8px 14px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer;">
-         ← Back to Home
-         </button>   
-            <h1>🏢 Welcome, ${company}!</h1>
-            <p style="color:#555;">Your SkillBridge LIVE industry dashboard</p>
+        <div style="
+            min-height:100vh;
+            padding:40px;
+            background:#f4f7ff;
+            font-family:Arial;
+            box-sizing:border-box;
+        ">
+
+            <div style="text-align:center;">
+
+                <button onclick="window.location.reload()"
+                    style="
+                        padding:8px 14px;
+                        border:none;
+                        border-radius:8px;
+                        background:#2563eb;
+                        color:white;
+                        cursor:pointer;
+                    ">
+                    ← Back to Home
+                </button>
+
+                <h1>🏢 Welcome, ${company}!</h1>
+
+                <p style="color:#555;">
+                    Your SkillBridge LIVE industry dashboard
+                </p>
+
+            </div>
+
+            <div style="
+                display:flex;
+                justify-content:center;
+                gap:25px;
+                flex-wrap:wrap;
+                margin-top:45px;
+            ">
+
+                <div style="
+                    width:230px;
+                    padding:25px;
+                    background:white;
+                    border-radius:16px;
+                    text-align:center;
+                    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+                ">
+
+                    <h2>📝 Post Job Requirement</h2>
+
+                    <p>Add the skills needed for a role.</p>
+
+                    <button onclick="openJobRequirement()"
+                        style="
+                            padding:10px 18px;
+                            border:none;
+                            border-radius:8px;
+                            background:#2563eb;
+                            color:white;
+                            cursor:pointer;
+                        ">
+                        Post Requirement
+                    </button>
+
+                </div>
+
+
+                <div style="
+                    width:230px;
+                    padding:25px;
+                    background:white;
+                    border-radius:16px;
+                    text-align:center;
+                    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+                ">
+
+                    <h2>👩‍🎓 Find Students</h2>
+
+                    <p>Find verified student talent.</p>
+
+                    <button onclick="openFindStudents()"
+                        style="
+                            padding:10px 18px;
+                            border:none;
+                            border-radius:8px;
+                            background:#2563eb;
+                            color:white;
+                            cursor:pointer;
+                        ">
+                        Find Talent
+                    </button>
+
+                </div>
+
+
+                <div style="
+                    width:230px;
+                    padding:25px;
+                    background:white;
+                    border-radius:16px;
+                    text-align:center;
+                    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+                ">
+
+                    <h2>📈 Skill Demand Analytics</h2>
+
+                    <p>View most requested technical skills.</p>
+
+                    <button onclick="openSkillDemandAnalytics()"
+                        style="
+                            padding:10px 18px;
+                            border:none;
+                            border-radius:8px;
+                            background:#2563eb;
+                            color:white;
+                            cursor:pointer;
+                        ">
+                        View Demand
+                    </button>
+
+                </div>
+
+            </div>
         </div>
-
-        <div style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:45px;">
-
-            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
-                <h2>📝 Post Job Requirement</h2>
-                <p>Add the skills needed for a role.</p>
-                <button onclick="openJobRequirement()"
-                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                    Post Requirement
-                </button>
-            </div>
-
-            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
-                <h2>👩‍🎓 Find Students</h2>
-                <p>Find verified student talent.</p>
-                <button onclick="openFindStudents()"
-                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                    Find Talent
-                </button>
-            </div>
-
-            <div style="width:230px; padding:25px; background:white; border-radius:16px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
-                <h2>📈 Skill Demand Analytics</h2>
-                <p>View most requested technical skills.</p>
-                <button onclick="openSkillDemandAnalytics()"
-                    style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                    View Demand
-                </button>
-            </div>
-
-        </div>
-    </div>
-`;
+    `;
 }
-function openStudentInsights() {
+
+async function openStudentInsights() {
+
     document.body.innerHTML = `
-        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
+        <div style="
+            min-height:100vh;
+            padding:45px;
+            background:#f4f7ff;
+            font-family:Arial;
+            text-align:center;
+        ">
+
             <h1>👩‍🎓 Student Insights</h1>
-            <p>Student skill profiles and progress overview.</p>
+
+            <p>
+                Student skill profiles and progress overview.
+            </p>
+
             <button onclick="collegeDashboard()"
-            style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-         ← Back to College Dashboard
-           </button>
+                style="
+                    padding:10px 18px;
+                    border:none;
+                    border-radius:8px;
+                    background:#2563eb;
+                    color:white;
+                    cursor:pointer;
+                ">
+                ← Back to College Dashboard
+            </button>
 
-            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
-                <div style="width:220px; background:white; padding:20px; border-radius:15px;">
-                    <h2>Sahana</h2>
-                    <p>Skills: HTML</p>
-                    <p>Learning: CSS, JavaScript, Git</p>
-                </div>
+            <div id="studentInsightsResults"
+                style="
+                    max-width:1000px;
+                    margin:35px auto;
+                ">
 
-                <div style="width:220px; background:white; padding:20px; border-radius:15px;">
-                    <h2>Arun</h2>
-                    <p>Skills: HTML, CSS</p>
-                    <p>Learning: JavaScript, Git</p>
-                </div>
+                <h3>🔄 Loading student data...</h3>
 
-                <div style="width:220px; background:white; padding:20px; border-radius:15px;">
-                    <h2>Priya</h2>
-                    <p>Skills: HTML, CSS, JavaScript</p>
-                    <p>Learning: Git</p>
-                </div>
             </div>
+
         </div>
     `;
+
+    try {
+
+        const studentSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "studentSkills")
+            );
+
+        const students = [];
+
+        studentSnapshot.forEach(doc => {
+
+            const student = doc.data();
+
+            students.push(student);
+
+        });
+
+        const results =
+            document.getElementById("studentInsightsResults");
+
+        if (students.length === 0) {
+
+            results.innerHTML = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                ">
+                    <h2>📭 No Student Data</h2>
+                    <p>No student skill profiles are available yet.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        let html = "";
+
+        students.forEach(student => {
+
+            html += `
+                <div style="
+                    background:white;
+                    padding:25px;
+                    margin-bottom:20px;
+                    border-radius:16px;
+                    text-align:left;
+                    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+                ">
+
+                    <h2>👤 ${student.name || "Student"}</h2>
+
+                    <p>
+                        📧 <b>Email:</b>
+                        ${student.email || "Not available"}
+                    </p>
+
+                    <p>
+                        🎓 <b>Branch:</b>
+                        ${student.branch || "Not available"}
+                    </p>
+
+                    <p>
+                        🛠️ <b>Skills:</b>
+                        ${student.skills || "No skills added"}
+                    </p>
+
+                </div>
+            `;
+
+        });
+
+        results.innerHTML = html;
+
+    } catch (error) {
+
+        console.error("Student Insights Error:", error);
+
+        document.getElementById("studentInsightsResults").innerHTML = `
+            <div style="
+                background:white;
+                padding:30px;
+                border-radius:16px;
+            ">
+                <h2>❌ Unable to load student data</h2>
+                <p>Please try again.</p>
+            </div>
+        `;
+    }
 }
-function openDepartmentAnalytics() {
+async function openDepartmentAnalytics() {
+
     document.body.innerHTML = `
-        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
-            <h1>📊 Department Analytics</h1>
-            <p>Student skill readiness overview.</p>
-            <button onclick="collegeDashboard()"
-          style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-            ← Back to College Dashboard
-          </button>
+        <div style="
+            min-height:100vh;
+            padding:45px;
+            background:#f4f7ff;
+            font-family:Arial;
+        ">
 
-            <div style="max-width:600px; margin:35px auto; background:white; padding:30px; border-radius:16px; text-align:left;">
-                <h3>HTML — 90%</h3>
-                <div style="height:18px; background:#dbeafe; border-radius:10px;">
-                    <div style="width:90%; height:18px; background:#2563eb; border-radius:10px;"></div>
-                </div>
+            <div style="text-align:center;">
 
-                <h3>CSS — 70%</h3>
-                <div style="height:18px; background:#dbeafe; border-radius:10px;">
-                    <div style="width:70%; height:18px; background:#2563eb; border-radius:10px;"></div>
-                </div>
+                <h1>📊 Department Analytics</h1>
 
-                <h3>JavaScript — 45%</h3>
-                <div style="height:18px; background:#dbeafe; border-radius:10px;">
-                    <div style="width:45%; height:18px; background:#2563eb; border-radius:10px;"></div>
-                </div>
+                <p>Student skill readiness overview.</p>
 
-                <h3>Git — 30%</h3>
-                <div style="height:18px; background:#dbeafe; border-radius:10px;">
-                    <div style="width:30%; height:18px; background:#2563eb; border-radius:10px;"></div>
-                </div>
+                <button onclick="collegeDashboard()"
+                    style="
+                        padding:10px 18px;
+                        border:none;
+                        border-radius:8px;
+                        background:#2563eb;
+                        color:white;
+                        cursor:pointer;
+                    ">
+                    ← Back to College Dashboard
+                </button>
+
             </div>
+
+            <div id="readinessResults"
+                style="
+                    max-width:800px;
+                    margin:35px auto;
+                ">
+
+                <h3 style="text-align:center;">
+                    🔄 Analyzing student skills...
+                </h3>
+
+            </div>
+
         </div>
     `;
+
+    try {
+
+        const snapshot =
+            await window.getDocs(
+                window.collection(window.db, "studentSkills")
+            );
+
+        const skillCount = {};
+        let totalStudents = 0;
+
+        snapshot.forEach(doc => {
+
+            const student = doc.data();
+
+            if (!student.email) return;
+
+            totalStudents++;
+
+            const skills =
+                (student.skills || "")
+                .toLowerCase()
+                .split(",")
+                .map(skill => skill.trim())
+                .filter(skill => skill);
+
+            skills.forEach(skill => {
+
+                if (!skillCount[skill]) {
+                    skillCount[skill] = 0;
+                }
+
+                skillCount[skill]++;
+
+            });
+
+        });
+
+        const results =
+            document.getElementById("readinessResults");
+
+        if (totalStudents === 0) {
+
+            results.innerHTML = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                    text-align:center;
+                ">
+                    <h2>📭 No Student Data</h2>
+                    <p>
+                        Add student skills to view readiness analysis.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        let html = `
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:16px;
+                margin-bottom:25px;
+                text-align:center;
+            ">
+
+                <h2>👩‍🎓 Total Students: ${totalStudents}</h2>
+
+                <p>
+                    Skill readiness is calculated from
+                    student skill profiles.
+                </p>
+
+            </div>
+        `;
+
+        Object.entries(skillCount).forEach(
+            ([skill, count]) => {
+
+                const percentage =
+                    Math.round(
+                        (count / totalStudents) * 100
+                    );
+
+                html += `
+                    <div style="
+                        background:white;
+                        padding:20px;
+                        margin-bottom:18px;
+                        border-radius:15px;
+                    ">
+
+                        <h3>
+                            🛠️ ${skill.toUpperCase()}
+                            — ${percentage}%
+                        </h3>
+
+                        <p>
+                            ${count} out of
+                            ${totalStudents} students
+                            have this skill.
+                        </p>
+
+                        <div style="
+                            height:18px;
+                            background:#dbeafe;
+                            border-radius:10px;
+                        ">
+
+                            <div style="
+                                width:${percentage}%;
+                                height:18px;
+                                background:#2563eb;
+                                border-radius:10px;
+                            "></div>
+
+                        </div>
+
+                    </div>
+                `;
+            }
+        );
+
+        results.innerHTML = html;
+
+    } catch (error) {
+
+        console.error(
+            "Department Analytics Error:",
+            error
+        );
+
+        document.getElementById(
+            "readinessResults"
+        ).innerHTML = `
+            <div style="
+                background:white;
+                padding:30px;
+                border-radius:16px;
+                text-align:center;
+            ">
+                <h2>❌ Unable to load analytics</h2>
+                <p>Please try again.</p>
+            </div>
+        `;
+    }
 }
-function openIndustryConnections() {
+async function openIndustryConnections() {
+
     document.body.innerHTML = `
-        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
-            <h1>🤝 Industry Connections</h1>
-            <p>Companies connected with your college.</p>
-            <button onclick="collegeDashboard()"
-           style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-         ← Back to College Dashboard
-          </button>
+        <div style="
+            min-height:100vh;
+            padding:45px;
+            background:#f4f7ff;
+            font-family:Arial;
+        ">
 
-            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
-                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
-                    <h2>TechNova</h2>
-                    <p>Frontend Internships</p>
-                    <button onclick="sendConnectionRequest('TechNova', 'Frontend Internships')"
-                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                        Connect
-                    </button>
-                </div>
+            <div style="text-align:center;">
 
-                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
-                    <h2>CodeCraft</h2>
-                    <p>Web Developer Roles</p>
-                    <button onclick="sendConnectionRequest('CodeCraft', 'Web Developer Roles')"
-                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                        Connect
-                    </button>
-                </div>
+                <h1>🤝 Industry Connections</h1>
 
-                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
-                    <h2>DataSpark</h2>
-                    <p>JavaScript Trainee Roles</p>
-                    <button onclick="sendConnectionRequest('DataSpark', 'JavaScript Trainee Roles')"
-                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                        Connect
-                    </button>
-                </div>
+                <p>Companies connected with your college.</p>
+
+                <button onclick="collegeDashboard()"
+                    style="
+                        padding:10px 18px;
+                        border:none;
+                        border-radius:8px;
+                        background:#2563eb;
+                        color:white;
+                        cursor:pointer;
+                    ">
+                    ← Back to College Dashboard
+                </button>
+
             </div>
+
+            <div id="industryResults"
+                style="
+                    max-width:900px;
+                    margin:35px auto;
+                ">
+
+                <h3 style="text-align:center;">
+                    🔄 Loading industry connections...
+                </h3>
+
+            </div>
+
         </div>
     `;
+
+    try {
+
+        const snapshot =
+            await window.getDocs(
+                window.collection(window.db, "jobRequirements")
+            );
+
+        const companies = {};
+
+        snapshot.forEach(doc => {
+
+            const job = doc.data();
+
+            const company =
+                job.company || "Company";
+
+            if (!companies[company]) {
+                companies[company] = [];
+            }
+
+            companies[company].push(job);
+
+        });
+
+        const results =
+            document.getElementById("industryResults");
+
+        if (Object.keys(companies).length === 0) {
+
+            results.innerHTML = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                    text-align:center;
+                ">
+                    <h2>📭 No Industry Connections</h2>
+
+                    <p>
+                        No companies have posted job requirements yet.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        let html = "";
+
+        Object.entries(companies).forEach(
+            ([company, jobs]) => {
+
+                html += `
+                    <div style="
+                        background:white;
+                        padding:25px;
+                        margin-bottom:20px;
+                        border-radius:16px;
+                        text-align:left;
+                        box-shadow:0 8px 20px rgba(0,0,0,0.1);
+                    ">
+
+                        <h2>🏢 ${company}</h2>
+
+                        <p>
+                            💼 <b>Job Requirements Posted:</b>
+                            ${jobs.length}
+                        </p>
+
+                        ${jobs.map(job => `
+                            <div style="
+                                margin-top:15px;
+                                padding:15px;
+                                background:#f4f7ff;
+                                border-radius:10px;
+                            ">
+
+                                <h3>
+                                    💼 ${job.title || "Job Opportunity"}
+                                </h3>
+
+                                <p>
+                                    🛠️ <b>Required Skills:</b>
+                                    ${job.skills || "Not specified"}
+                                </p>
+
+                            </div>
+                        `).join("")}
+
+                    </div>
+                `;
+            }
+        );
+
+        results.innerHTML = html;
+
+    } catch (error) {
+
+        console.error(
+            "Industry Connections Error:",
+            error
+        );
+
+        document.getElementById(
+            "industryResults"
+        ).innerHTML = `
+            <div style="
+                background:white;
+                padding:30px;
+                border-radius:16px;
+                text-align:center;
+            ">
+
+                <h2>❌ Unable to load industry data</h2>
+
+                <p>Please try again.</p>
+
+            </div>
+        `;
+    }
 }
 function openJobRequirement() {
     document.body.innerHTML = `
@@ -3087,55 +3773,275 @@ function openJobRequirement() {
     `;
 }
 
-function saveJobRequirement() {
-    const title = document.getElementById("jobTitle").value;
-    const skills = document.getElementById("jobSkills").value;
+async function saveJobRequirement() {
 
-    document.getElementById("jobResult").innerHTML =
-        title && skills
-            ? `✅ <b>${title}</b> requirement posted for: ${skills}`
-            : "⚠️ Please enter both job title and required skills.";
+    const title = document.getElementById("jobTitle").value.trim();
+    const skills = document.getElementById("jobSkills").value.trim();
+    const result = document.getElementById("jobResult");
+
+    if (!title || !skills) {
+        result.innerHTML =
+            "⚠️ Please enter both job title and required skills.";
+        return;
+    }
+
+    const company = sessionStorage.getItem("companyName") || "";
+
+    try {
+
+        await window.addDoc(
+            window.collection(window.db, "jobRequirements"),
+            {
+                company: company,
+                title: title,
+                skills: skills,
+                createdAt: window.serverTimestamp()
+            }
+        );
+
+        result.innerHTML =
+            `✅ <b>${title}</b> requirement posted successfully!`;
+
+        console.log("Job requirement saved to Firestore!");
+
+    } catch (error) {
+
+        console.error("Firestore Job Error:", error);
+
+        result.innerHTML =
+            "❌ Job requirement could not be saved.";
+    }
 }
-function openFindStudents() {
+async function openFindStudents() {
+
     document.body.innerHTML = `
-        <div style="min-height:100vh; padding:45px; background:#f4f7ff; font-family:Arial; text-align:center;">
-            <h1>👩‍🎓 Find Students</h1>
-            <p>Verified student talent matching industry requirements.</p>
+        <div style="
+            min-height:100vh;
+            padding:45px;
+            background:#f4f7ff;
+            font-family:Arial;
+            text-align:center;
+        ">
+
+            <h1>👩‍🎓 Find Suitable Students</h1>
+
+            <p>
+                Students matched with industry job requirements.
+            </p>
+
             <button onclick="industryDashboard()"
-         style="padding:10px 18px; border:none; border-radius:8px; background:#2563eb; color:white;">
-         ← Back to Industry Dashboard
-         </button>
+                style="
+                    padding:10px 18px;
+                    border:none;
+                    border-radius:8px;
+                    background:#2563eb;
+                    color:white;
+                ">
+                ← Back to Industry Dashboard
+            </button>
 
-            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:35px;">
-                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
-                    <h2>Sahana</h2>
-                    <p>Skills: HTML, CSS</p>
-                    <button onclick="viewStudentProfile('Sahana', 'HTML, CSS')"
-                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                        View Profile
-                    </button>
-                </div>
-
-                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
-                    <h2>Arun</h2>
-                    <p>Skills: HTML, CSS, JavaScript</p>
-                    <button onclick="viewStudentProfile('Arun', 'HTML, CSS, JavaScript')"
-                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                        View Profile
-                    </button>
-                </div>
-
-                <div style="width:220px; background:white; padding:22px; border-radius:15px;">
-                    <h2>Priya</h2>
-                    <p>Skills: JavaScript, Git</p>
-                    <button onclick="viewStudentProfile('Priya', 'JavaScript, Git')"
-                        style="padding:10px; border:none; border-radius:8px; background:#2563eb; color:white;">
-                        View Profile
-                    </button>
-                </div>
+            <div id="matchingResults"
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:20px;
+                    flex-wrap:wrap;
+                    margin-top:35px;
+                ">
+                <h3>🔄 Finding suitable students...</h3>
             </div>
+
         </div>
     `;
+
+    try {
+
+        // Get student skills
+        const studentSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "studentSkills")
+            );
+
+        // Get industry job requirements
+        const jobSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "jobRequirements")
+            );
+
+        const studentsMap = new Map();
+
+         studentSnapshot.forEach(doc => {
+
+         const student = doc.data();
+
+        const key = student.email || student.name;
+
+           if (!studentsMap.has(key)) {
+        studentsMap.set(key, student);
+    }
+});
+
+const students = Array.from(studentsMap.values());
+
+        const jobs = [];
+
+        jobSnapshot.forEach(doc => {
+            jobs.push(doc.data());
+        });
+
+        const results =
+            document.getElementById("matchingResults");
+
+        if (jobs.length === 0) {
+
+            results.innerHTML = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                ">
+                    <h2>📭 No Job Requirements Found</h2>
+                    <p>
+                        Industry has not posted any job requirements yet.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        if (students.length === 0) {
+
+            results.innerHTML = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                ">
+                    <h2>📭 No Student Skills Found</h2>
+                    <p>
+                        Students need to save their skills first.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        let html = "";
+
+        jobs.forEach(job => {
+
+            const requiredSkills =
+                job.skills
+                    .toLowerCase()
+                    .split(",")
+                    .map(skill => skill.trim())
+                    .filter(skill => skill);
+
+            students.forEach(student => {
+
+                const studentSkillList =
+                    student.skills
+                        .toLowerCase()
+                        .split(",")
+                        .map(skill => skill.trim())
+                        .filter(skill => skill);
+
+                const matchedSkills =
+                    requiredSkills.filter(skill =>
+                        studentSkillList.includes(skill)
+                    );
+
+                const matchPercentage =
+                    Math.round(
+                        (matchedSkills.length /
+                        requiredSkills.length) * 100
+                    );
+
+                if (matchPercentage > 0) {
+
+                    html += `
+                        <div style="
+                            width:280px;
+                            background:white;
+                            padding:25px;
+                            border-radius:16px;
+                            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+                            text-align:left;
+                        ">
+
+                            <h2>👨‍🎓 ${student.name}</h2>
+
+                            <p>
+                                <b>Branch:</b>
+                                ${student.branch || "N/A"}
+                            </p>
+
+                            <p>
+                                <b>Company:</b>
+                                ${job.company || "Company"}
+                            </p>
+
+                            <p>
+                                <b>Job:</b>
+                                ${job.title}
+                            </p>
+
+                            <p>
+                                <b>Required Skills:</b>
+                                ${job.skills}
+                            </p>
+
+                            <p>
+                                <b>Matched Skills:</b>
+                                ${matchedSkills.join(", ")}
+                            </p>
+
+                            <h3 style="color:#2563eb;">
+                                🎯 Match: ${matchPercentage}%
+                            </h3>
+
+                        </div>
+                    `;
+                }
+
+            });
+
+        });
+
+        if (!html) {
+
+            html = `
+                <div style="
+                    background:white;
+                    padding:30px;
+                    border-radius:16px;
+                ">
+                    <h2>🔍 No Skill Match Found</h2>
+                    <p>
+                        No student currently matches the posted requirements.
+                    </p>
+                </div>
+            `;
+        }
+
+        results.innerHTML = html;
+
+    } catch (error) {
+
+        console.error("Matching Error:", error);
+
+        document.getElementById("matchingResults").innerHTML = `
+            <div style="
+                background:white;
+                padding:30px;
+                border-radius:16px;
+            ">
+                ❌ Unable to load matching data.
+            </div>
+        `;
+    }
 }
 function openSkillDemandAnalytics() {
     document.body.innerHTML = `
@@ -5549,6 +6455,116 @@ window.onload = function() {
     sbOpenAuth();
 };
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDkV3RhCxXDIbw3K3iJjUZ5N9A3vo3jqgg",
+    authDomain: "skillbridge-live.firebaseapp.com",
+    projectId: "skillbridge-live",
+    storageBucket: "skillbridge-live.firebasestorage.app",
+    messagingSenderId: "1040290805346",
+    appId: "1:1040290805346:web:ceaeae1236bf885402433b",
+    measurementId: "G-CGJ1HMEPB7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window.db = db;
+  window.addDoc = addDoc;
+  window.collection = collection;
+  window.serverTimestamp = serverTimestamp;
+  window.getDocs = getDocs;
+
+  console.log("Firebase connected!");
+  async function loadCollegeDashboardStats() {
+
+    try {
+
+        const studentSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "studentSkills")
+            );
+
+        const jobSnapshot =
+            await window.getDocs(
+                window.collection(window.db, "jobRequirements")
+            );
+
+        const students = new Map();
+        const skills = new Set();
+        const companies = new Set();
+
+        studentSnapshot.forEach(doc => {
+
+            const student = doc.data();
+
+            const key =
+                student.email ||
+                student.name ||
+                doc.id;
+
+            students.set(key, student);
+
+            (student.skills || "")
+                .split(",")
+                .map(skill => skill.trim().toLowerCase())
+                .filter(skill => skill)
+                .forEach(skill => skills.add(skill));
+
+        });
+
+        jobSnapshot.forEach(doc => {
+
+            const job = doc.data();
+
+            if (job.company) {
+                companies.add(job.company);
+            }
+
+        });
+
+        const studentCount =
+            document.getElementById("collegeStudentCount");
+
+        const skillCount =
+            document.getElementById("collegeSkillCount");
+
+        const jobCount =
+            document.getElementById("collegeJobCount");
+
+        const companyCount =
+            document.getElementById("collegeCompanyCount");
+
+        if (studentCount)
+            studentCount.innerText = students.size;
+
+        if (skillCount)
+            skillCount.innerText = skills.size;
+
+        if (jobCount)
+            jobCount.innerText = jobSnapshot.size;
+
+        if (companyCount)
+            companyCount.innerText = companies.size;
+
+    } catch (error) {
+
+        console.error(
+            "College Dashboard Stats Error:",
+            error
+        );
+
+    }
+}
+</script>
+
 </body>
 
 </html>
